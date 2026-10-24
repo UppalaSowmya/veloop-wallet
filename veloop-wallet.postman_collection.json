@@ -1,0 +1,258 @@
+{
+  "info": {
+    "_postman_id": "dffc56cf-d235-4c44-83f5-add9080c7e8a",
+    "name": "veloop-wallet",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52826167"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://veloop-wallet.onrender.com/api/health",
+          "protocol": "https",
+          "host": [
+            "veloop-wallet",
+            "onrender",
+            "com"
+          ],
+          "path": [
+            "api",
+            "health"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"test\",\r\n  \"email\": \"testuser3@example.com\",\r\n  \"password\": \"TestPass123!\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://veloop-wallet.onrender.com/api/auth/login",
+          "protocol": "https",
+          "host": [
+            "veloop-wallet",
+            "onrender",
+            "com"
+          ],
+          "path": [
+            "api",
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Wallet",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{json_web_token_0dh9}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://veloop-wallet.onrender.com/api/wallet",
+          "protocol": "https",
+          "host": [
+            "veloop-wallet",
+            "onrender",
+            "com"
+          ],
+          "path": [
+            "api",
+            "wallet"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Transactions",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{json_web_token_0dh9}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://veloop-wallet.onrender.com/api/transactions?page=1&limit=10",
+          "protocol": "https",
+          "host": [
+            "veloop-wallet",
+            "onrender",
+            "com"
+          ],
+          "path": [
+            "api",
+            "transactions"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "key": "limit",
+              "value": "10"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Payout Options",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{json_web_token_0dh9}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://veloop-wallet.onrender.com/api/payouts/options",
+          "protocol": "https",
+          "host": [
+            "veloop-wallet",
+            "onrender",
+            "com"
+          ],
+          "path": [
+            "api",
+            "payouts",
+            "options"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Withdrawal",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{json_web_token_0dh9}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Idempotency-Key",
+            "value": "demo-withdrawal-001"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"payoutOptionId\": \"6acf2189a40f5f93795064ce\",\r\n  \"payoutDetails\": {\r\n    \"upiId\": \"test@upi\"\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://veloop-wallet.onrender.com/api/withdrawals",
+          "protocol": "https",
+          "host": [
+            "veloop-wallet",
+            "onrender",
+            "com"
+          ],
+          "path": [
+            "api",
+            "withdrawals"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Withdrawal History",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{json_web_token_0dh9}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://veloop-wallet.onrender.com/api/withdrawals?page=1&limit=10",
+          "protocol": "https",
+          "host": [
+            "veloop-wallet",
+            "onrender",
+            "com"
+          ],
+          "path": [
+            "api",
+            "withdrawals"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "key": "limit",
+              "value": "10"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "json_web_token_0dh9",
+      "secret": true
+    }
+  ]
+}
