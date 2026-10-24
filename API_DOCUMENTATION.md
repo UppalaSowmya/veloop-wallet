@@ -59,13 +59,44 @@ Content-Type: application/json
 Idempotency-Key: unique-key-for-this-request
 The exact body depends on the current withdrawal controller and payout method. Use an option ID returned by the payout-options endpoint and provide the required payout details. Do not trust a client-supplied required VE amount; the backend must look up the option and validate the user's balance.
 
-Example body shape only—adjust field names to match the route:
+**Withdrawal request examples**
+
+Endpoint: `POST /withdrawals`
+
+Headers:
+- `Authorization: Bearer YOUR_JWT_TOKEN`
+- `Content-Type: application/json`
+- `Idempotency-Key: unique-key-between-8-and-128-characters`
+
+UPI example:
+```json
 {
   "payoutOptionId": "OPTION_ID_FROM_API",
   "payoutDetails": {
     "upiId": "demo@upi"
   }
 }
+```
+
+PayPal example:
+```json
+{
+  "payoutOptionId": "OPTION_ID_FROM_API",
+  "payoutDetails": {
+    "email": "demo@example.com"
+  }
+}
+```
+
+Gift-card example:
+```json
+{
+  "payoutOptionId": "OPTION_ID_FROM_API",
+  "payoutDetails": {}
+}
+```
+
+Use a real payout option ID returned by `GET /payouts/options` when testing. These are example values only; no real payout is performed by these examples.
 A successful request should create a withdrawal with a status such as PENDING and the corresponding ledger entry. The implementation should prevent duplicate processing for the same idempotency key.
 List withdrawal history
 GET /withdrawals?page=1&limit=10
